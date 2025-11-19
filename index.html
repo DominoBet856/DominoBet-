@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domino Bet</title>
+    <title>Domino Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>مرحبا بك في Domino Bet</h1>
+<div class="container">
 
-    <div class="login-box">
-        <h2>تسجيل الدخول</h2>
-        <input id="email" type="text" placeholder="البريد الإلكتروني">
-        <input id="password" type="password" placeholder="كلمة المرور">
-        <button onclick="login()">تسجيل الدخول</button>
+    <h2>تسجيل الدخول</h2>
 
-        <p>ليس لديك حساب؟ <a href="#" onclick="showRegister()">إنشاء حساب</a></p>
-    </div>
+    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+    <input type="password" id="loginPassword" placeholder="كلمة المرور">
 
-    <div id="register-box" class="register-box hidden">
+    <button onclick="login()">دخول</button>
+
+    <p>ليس لديك حساب؟ <a href="#" onclick="showRegister()">إنشاء حساب</a></p>
+
+    <div id="registerBox" style="display:none;">
         <h2>إنشاء حساب جديد</h2>
-        <input id="reg-email" type="text" placeholder="البريد الإلكتروني">
-        <input id="reg-password" type="password" placeholder="كلمة المرور">
-        <button onclick="register()">تسجيل</button>
 
-        <p><a href="#" onclick="hideRegister()">رجوع</a></p>
+        <input type="email" id="regEmail" placeholder="البريد الإلكتروني">
+        <input type="password" id="regPassword" placeholder="كلمة المرور">
+
+        <button onclick="register()">إنشاء حساب</button>
+        <button onclick="hideRegister()">رجوع</button>
     </div>
 
-    <script type="module" src="app.js"></script>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
