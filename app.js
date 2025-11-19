@@ -43,6 +43,26 @@ function login() {
     let found = users.find(u => u.email === email && u.password === password);
 
     if (found) {
+        alert("تم تسجيل الدخول!");
+
+        // حفظ المستخدم الحالي
+        localStorage.setItem("currentUser", JSON.stringify(found));
+
+        // الانتقال للوحة التحكم
+        window.location.href = "dashboard.html";
+
+    } else {
+        alert("البريد أو كلمة المرور غير صحيحة");
+    }
+}
+    let email = document.getElementById("loginEmail").value;
+    let password = document.getElementById("loginPassword").value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let found = users.find(u => u.email === email && u.password === password);
+
+    if (found) {
         alert("تم تسجيل الدخول بنجاح!");
         window.location.href = "home.html"; // صفحة اللاعب بعد تسجيل الدخول
     } else {
