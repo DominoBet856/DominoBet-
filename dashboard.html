@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Domino Best</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>⚙️ لوحة التحكم - المدير</h1>
+                <div class="user-info">
+                    <span id="adminName"></span>
+                    <button onclick="logout()" class="btn btn-small">تسجيل الخروج</button>
+                    <button onclick="goToLobby()" class="btn btn-small btn-info">الصالة</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="dashboard-container">
+                <!-- نظرة عامة على الإحصائيات -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>👥 إجمالي المستخدمين</h3>
+                        <span id="totalUsers" class="stat-number">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>💎 إجمالي الرصيد</h3>
+                        <span id="totalCredits" class="stat-number">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>📥 إيداعات معلقة</h3>
+                        <span id="pendingDeposits" class="stat-number">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>📤 سحوبات معلقة</h3>
+                        <span id="pendingWithdrawals" class="stat-number">0</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-tabs">
+                    <button class="tab-button active" onclick="openTab('usersTab')">إدارة المستخدمين</button>
+                    <button class="tab-button" onclick="openTab('depositsTab')">طلبات الإيداع</button>
+                    <button class="tab-button" onclick="openTab('withdrawalsTab')">طلبات السحب</button>
+                    <button class="tab-button" onclick="openTab('walletTab')">إدارة المحفظة</button>
+                    <button class="tab-button" onclick="openTab('transactionsTab')">سجل المعاملات</button>
+                </div>
+
+                <!-- تبويب إدارة المستخدمين -->
+                <div id="usersTab" class="tab-content active">
+                    <h3>إدارة المستخدمين</h3>
+                    <div class="table-container">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>الرصيد</th>
+                                    <th>تاريخ الإنشاء</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- يتم تعبئة المستخدمين ديناميكياً -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- تبويب طلبات الإيداع -->
+                <div id="depositsTab" class="tab-content">
+                    <h3>طلبات الإيداع المعلقة</h3>
+                    <div class="table-container">
+                        <table id="depositsTable">
+                            <thead>
+                                <tr>
+                                    <th>المستخدم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>المبلغ</th>
+                                    <th>رقم المرسل</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="depositsTableBody">
+                                <!-- يتم تعبئة طلبات الإيداع ديناميكياً -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- تبويب طلبات السحب -->
+                <div id="withdrawalsTab" class="tab-content">
+                    <h3>طلبات السحب المعلقة</h3>
+                    <div class="table-container">
+                        <table id="withdrawalsTable">
+                            <thead>
+                                <tr>
+                                    <th>المستخدم</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>المبلغ</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="withdrawalsTableBody">
+                                <!-- يتم تعبئة طلبات السحب ديناميكياً -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- تبويب إدارة المحفظة -->
+                <div id="walletTab" class="tab-content">
+                    <h3>إدارة المحفظة الرئيسية</h3>
+                    <div class="wallet-management">
+                        <div class="form-group">
+                            <label>رقم المحفظة الحالي:</label>
+                            <div id="currentWalletNumber" class="wallet-display">جاري التحميل...</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newWalletNumber">رقم المحفظة الجديد:</label>
+                            <input type="text" id="newWalletNumber" placeholder="أدخل رقم المحفظة الجديد">
+                        </div>
+                        <button onclick="updateWalletNumber()" class="btn btn-primary">تحديث رقم المحفظة</button>
+                    </div>
+                </div>
+
+                <!-- تبويب سجل المعاملات -->
+                <div id="transactionsTab" class="tab-content">
+                    <h3>سجل المعاملات</h3>
+                    <div class="table-container">
+                        <table id="transactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>المستخدم</th>
+                                    <th>النوع</th>
+                                    <th>المبلغ</th>
+                                    <th>الوصف</th>
+                                    <th>التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody">
+                                <!-- يتم تعبئة المعاملات ديناميكياً -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- مودال تعديل رصيد المستخدم -->
+    <div id="userCreditsModal" class="modal">
+        <div class="modal-content">
+            <h3 id="userCreditsTitle">تعديل رصيد المستخدم</h3>
+            <div class="form-group">
+                <label>المستخدم:</label>
+                <span id="modalUserName"></span>
+            </div>
+            <div class="form-group">
+                <label>الرصيد الحالي:</label>
+                <span id="modalCurrentBalance"></span>
+            </div>
+            <div class="form-group">
+                <label>الإجراء:</label>
+                <select id="creditAction">
+                    <option value="add">إضافة رصيد</option>
+                    <option value="remove">خصم رصيد</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>المبلغ:</label>
+                <input type="number" id="creditAmount" min="1" value="100">
+            </div>
+            <div class="modal-actions">
+                <button onclick="updateUserCredits()" class="btn btn-primary">تأكيد</button>
+                <button onclick="closeModal('userCreditsModal')" class="btn btn-secondary">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

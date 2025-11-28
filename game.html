@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طاولة الدومينو - Domino Best</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>🎯 طاولة الدومينو</h1>
+                <div class="game-info">
+                    <span id="roomId"></span>
+                    <span id="gameTimer" class="timer">20</span>
+                    <span id="currentTurn"></span>
+                    <button onclick="leaveGame()" class="btn btn-small btn-warning">ترك المباراة</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="game-container">
+                <!-- معلومات الخصم -->
+                <div class="player-area opponent-area">
+                    <div class="player-info">
+                        <h3 id="opponentName">الخصم</h3>
+                        <div class="player-stats">
+                            <span>القطع المتبقية: <span id="opponentTilesCount">7</span></span>
+                            <span>الحالة: <span id="opponentStatus">🟢 متصل</span></span>
+                        </div>
+                    </div>
+                    <div class="tiles-container">
+                        <div id="opponentTiles" class="opponent-tiles">
+                            <!-- قطع الخصم تظهر كمستطيلات فارغة -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- لوحة اللعبة -->
+                <div class="board-container">
+                    <div id="gameBoard" class="domino-board">
+                        <div class="board-center">
+                            <p id="boardMessage">جاري تحميل اللعبة...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- منطقة اللاعب الحالي -->
+                <div class="player-area current-player-area">
+                    <div class="player-info">
+                        <h3 id="playerName">أنت</h3>
+                        <div class="player-stats">
+                            <span>القطع المتبقية: <span id="playerTilesCount">7</span></span>
+                            <span>دورك: <span id="turnIndicator">❌</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="tiles-container">
+                        <div id="playerTiles" class="player-tiles">
+                            <!-- قطع اللاعب تضاف ديناميكياً -->
+                        </div>
+                    </div>
+
+                    <div class="game-controls">
+                        <button id="drawTile" class="btn btn-info">سحب قطعة من المخزون</button>
+                        <div class="stock-info">
+                            القطع في المخزون: <span id="stockCount">14</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الدردشة -->
+                <div class="chat-section">
+                    <h4>💬 الدردشة</h4>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="system-message">مرحباً بك في المباراة! يمكنك الدردشة مع الخصم هنا.</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="اكتب رسالة..." maxlength="100">
+                        <button onclick="sendChatMessage()" class="btn btn-small">إرسال</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- مودال انتهاء اللعبة -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h3 id="gameResultTitle">انتهت المباراة</h3>
+            <div id="gameResultDetails"></div>
+            <div class="modal-actions">
+                <button onclick="returnToLobby()" class="btn btn-primary">العودة إلى الصالة</button>
+                <button onclick="playAgain()" class="btn btn-success">لعب مباراة أخرى</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

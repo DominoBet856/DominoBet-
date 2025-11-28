@@ -1,0 +1,24 @@
+{
+  "name": "domino-best",
+  "version": "1.0.0",
+  "description": "منصة ألعاب الدومينو بالرصيد الافتراضي",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["domino", "game", "credits", "multiplayer"],
+  "author": "Domino Best Team",
+  "license": "MIT"
+}
