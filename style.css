@@ -1,0 +1,47 @@
+body {
+    font-family: Tahoma;
+    background: #1b1b1b;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 40px;
+}
+
+.box {
+    background: #333;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+input {
+    width: 250px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+button {
+    background: orange;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 22px;
+    color: yellow;
+}
+
+.about {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    opacity: 0.4;
+    font-size: 11px;
+    cursor: pointer;
+}
