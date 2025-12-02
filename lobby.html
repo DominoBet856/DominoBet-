@@ -1,156 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصالة - Domino Best</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <h1>🎮 صالة الألعاب</h1>
-                <div class="user-info">
-                    <span id="userName"></span>
-                    <span id="userBalance" class="balance"></span>
-                    <button onclick="logout()" class="btn btn-small">تسجيل الخروج</button>
-                </div>
-            </div>
-        </header>
-
-        <main class="main-content">
-            <div class="lobby-container">
-                <div class="game-section">
-                    <h2>بدء مباراة جديدة</h2>
-                    
-                    <div class="bet-selection">
-                        <h3>اختر مبلغ الرهان:</h3>
-                        <div class="bet-options">
-                            <label class="bet-option">
-                                <input type="radio" name="betAmount" value="10">
-                                <span>10 نقطة</span>
-                            </label>
-                            <label class="bet-option">
-                                <input type="radio" name="betAmount" value="20">
-                                <span>20 نقطة</span>
-                            </label>
-                            <label class="bet-option">
-                                <input type="radio" name="betAmount" value="30">
-                                <span>30 نقطة</span>
-                            </label>
-                            <label class="bet-option">
-                                <input type="radio" name="betAmount" value="50">
-                                <span>50 نقطة</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <button id="startGame" class="btn btn-primary btn-large">ابدأ مباراة</button>
-                </div>
-
-                <div class="info-section">
-                    <div class="info-card">
-                        <h3>👥 اللاعبون المتصلون</h3>
-                        <div id="onlineUsers" class="online-users">
-                            <div class="loading">جاري تحميل البيانات...</div>
-                        </div>
-                    </div>
-
-                    <div class="info-card">
-                        <h3>📊 إحصائياتك</h3>
-                        <div class="user-stats">
-                            <div class="stat-item">
-                                <span>المباريات الملعوبة:</span>
-                                <span id="gamesPlayed">0</span>
-                            </div>
-                            <div class="stat-item">
-                                <span>المباريات الفائزة:</span>
-                                <span id="gamesWon">0</span>
-                            </div>
-                            <div class="stat-item">
-                                <span>معدل الفوز:</span>
-                                <span id="winRate">0%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="info-card">
-                        <h3>💼 محفظتك</h3>
-                        <div class="wallet-actions">
-                            <button onclick="showDepositModal()" class="btn btn-success">إيداع رصيد</button>
-                            <button onclick="showWithdrawModal()" class="btn btn-warning">طلب سحب</button>
-                            <button onclick="showTransactions()" class="btn btn-info">سجل المعاملات</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- مودال الإيداع -->
-    <div id="depositModal" class="modal">
-        <div class="modal-content">
-            <h3>إيداع رصيد</h3>
-            <div class="wallet-info" id="walletInfo">
-                <p><strong>رقم المحفظة:</strong> <span id="walletNumber">جاري التحميل...</span></p>
-                <small>أرسل المبلغ إلى هذا الرقم ثم أكمل البيانات</small>
-            </div>
-            <div class="form-group">
-                <label for="depositAmount">المبلغ المرسل:</label>
-                <input type="number" id="depositAmount" min="10" max="1000" value="100">
-            </div>
-            <div class="form-group">
-                <label for="senderNumber">رقم المرسل:</label>
-                <input type="text" id="senderNumber" placeholder="أدخل رقم الهاتف الذي أرسل منه">
-            </div>
-            <div class="modal-actions">
-                <button onclick="requestDeposit()" class="btn btn-success">تقديم طلب الإيداع</button>
-                <button onclick="closeModal('depositModal')" class="btn btn-secondary">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- مودال السحب -->
-    <div id="withdrawModal" class="modal">
-        <div class="modal-content">
-            <h3>طلب سحب رصيد</h3>
-            <div class="form-group">
-                <label for="withdrawAmount">المبلغ:</label>
-                <input type="number" id="withdrawAmount" min="10" max="1000">
-            </div>
-            <div class="modal-actions">
-                <button onclick="requestWithdrawal()" class="btn btn-warning">تقديم طلب السحب</button>
-                <button onclick="closeModal('withdrawModal')" class="btn btn-secondary">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- مودال المعاملات -->
-    <div id="transactionsModal" class="modal">
-        <div class="modal-content" style="max-width: 800px;">
-            <h3>سجل المعاملات</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>النوع</th>
-                            <th>المبلغ</th>
-                            <th>الوصف</th>
-                            <th>التاريخ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="transactionsTableBody">
-                        <!-- سيتم تعبئة البيانات ديناميكياً -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-actions">
-                <button onclick="closeModal('transactionsModal')" class="btn btn-secondary">إغلاق</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="lobby.js"></script>
-</body>
-</html>
